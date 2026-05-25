@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "380293851351",
+    "project_id": "testetermus",
+    "storage_bucket": "testetermus.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380293851351:android:9af8daba7e0f24af9a6892",
+        "android_client_info": {
+          "package_name": "com.gustavo.termus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380293851351-h5s87q2pr0lehg15adk75uhj4hoght5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gustavo.termus",
+            "certificate_hash": "8c56960c7cacb62bb4511709cc64e5bf1c192b7f"
+          }
+        },
+        {
+          "client_id": "380293851351-jk3mmkc4gcb4b7iiatn6qh8m7d0uhoco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBicZ__cfIScfvwsFrMrsJv84yl0CEdeL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380293851351-jk3mmkc4gcb4b7iiatn6qh8m7d0uhoco.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
