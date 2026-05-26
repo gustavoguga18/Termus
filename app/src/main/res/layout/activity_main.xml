@@ -2,12 +2,13 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#121213">
 
-    <!-- TOPO USUARIO -->
+    <!-- TOP BAR -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,11 +21,13 @@
             android:id="@+id/imgUser"
             android:layout_width="52dp"
             android:layout_height="52dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:layout_marginStart="14dp">
 
@@ -42,9 +45,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="🔥 0"
-                android:textColor="#AAAAAA"/>
+                android:textColor="#AAAAAA"
+                android:textSize="14sp"/>
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/btnStats"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@android:drawable/ic_menu_info_details"
+            android:tint="#FFFFFF"
+            android:layout_marginEnd="18dp"/>
+
+        <ImageView
+            android:id="@+id/btnConfig"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@android:drawable/ic_menu_preferences"
+            android:tint="#FFFFFF"/>
     </LinearLayout>
 
     <!-- TITULO -->
@@ -55,7 +73,7 @@
         android:text="TERMUS"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:gravity="center"
         android:layout_marginBottom="20dp"/>
 
@@ -83,7 +101,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp"
-        android:layout_marginBottom="12dp"/>
+        android:padding="8dp"/>
+
+    <!-- BOTTOM NAVIGATION -->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1E1F22"
+        app:itemIconTint="#FFFFFF"
+        app:itemTextColor="#FFFFFF"
+        app:menu="@menu/bottom_menu"/>
 
 </LinearLayout>

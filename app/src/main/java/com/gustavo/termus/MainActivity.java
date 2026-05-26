@@ -1,5 +1,6 @@
 package com.gustavo.termus;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -10,11 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.squareup.picasso.Picasso;
@@ -22,6 +25,8 @@ import com.squareup.picasso.Picasso;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import java.text.Normalizer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
     // FIREBASE
 
     ImageView imgUser;
+
+    ImageView btnStats;
+
+    ImageView btnConfig;
 
     TextView txtNome;
 
@@ -109,6 +118,106 @@ public class MainActivity extends AppCompatActivity {
         criarTeclado();
 
         carregarUsuario();
+
+        // =========================
+        // BOTTOM NAVIGATION
+        // =========================
+
+        BottomNavigationView bottomNav =
+                findViewById(R.id.bottomNav);
+
+        bottomNav.setOnItemSelectedListener(item -> {
+
+            int id = item.getItemId();
+
+            if (id == R.id.menu_home) {
+
+                return true;
+            }
+
+            if (id == R.id.menu_ranking) {
+
+                startActivity(
+                        new Intent(
+                                MainActivity.this,
+                                RankingActivity.class
+                        )
+                );
+
+                return true;
+            }
+
+            if (id == R.id.menu_perfil) {
+
+                startActivity(
+                        new Intent(
+                                MainActivity.this,
+                                PerfilActivity.class
+                        )
+                );
+
+                return true;
+            }
+
+            if (id == R.id.menu_config) {
+
+                startActivity(
+                        new Intent(
+                                MainActivity.this,
+                                ConfigActivity.class
+                        )
+                );
+
+                return true;
+            }
+
+            return false;
+        });
+    }
+
+    // =========================
+    // NORMALIZAR TEXTO
+    // =========================
+
+    private String normalizar(String texto) {
+
+        texto = texto.toLowerCase();
+
+        texto = Normalizer.normalize(
+                texto,
+                Normalizer.Form.NFD
+        );
+
+        texto = texto.replaceAll(
+                "[\\p{InCombiningDiacriticalMarks}]",
+                ""
+        );
+
+        texto = texto.replace("ç", "c");
+
+        return texto;
+    }
+
+    // =========================
+    // MODAL ESTATISTICAS
+    // =========================
+
+    private void mostrarEstatisticas() {
+
+        String texto =
+                "🎮 Jogos: " + jogos +
+                        "\n🏆 Vitórias: " + vitorias +
+                        "\n🔥 Streak: " + streakAtual +
+                        "\n⭐ Melhor streak: " + melhorStreak;
+
+        new AlertDialog.Builder(this)
+                .setTitle("Estatísticas")
+                .setMessage(texto)
+                .setPositiveButton(
+                        "OK",
+                        null
+                )
+                .show();
     }
 
     // =========================
@@ -245,10 +354,9 @@ public class MainActivity extends AppCompatActivity {
 
             while ((linha = br.readLine()) != null) {
 
-                linha =
-                        linha
-                                .trim()
-                                .toLowerCase();
+                linha = normalizar(
+                        linha.trim()
+                );
 
                 if (linha.length() == 5) {
 
@@ -282,10 +390,9 @@ public class MainActivity extends AppCompatActivity {
 
             while ((linha = br.readLine()) != null) {
 
-                linha =
-                        linha
-                                .trim()
-                                .toLowerCase();
+                linha = normalizar(
+                        linha.trim()
+                );
 
                 if (linha.length() == 5) {
 
@@ -337,22 +444,22 @@ public class MainActivity extends AppCompatActivity {
                 GridLayout.LayoutParams params =
                         new GridLayout.LayoutParams();
 
-                params.width = 120;
+                params.width = 165;
 
-                params.height = 120;
+                params.height = 165;
 
                 params.setMargins(
-                        6,
-                        6,
-                        6,
-                        6
+                        8,
+                        8,
+                        8,
+                        8
                 );
 
                 tv.setLayoutParams(params);
 
                 tv.setGravity(Gravity.CENTER);
 
-                tv.setTextSize(28);
+                tv.setTextSize(34);
 
                 tv.setTextColor(0xFFFFFFFF);
 
@@ -483,7 +590,7 @@ public class MainActivity extends AppCompatActivity {
         letras[linhaAtual][colunaAtual]
                 .setText(letra);
 
-        tentativaAtual += letra.toLowerCase();
+        tentativaAtual += normalizar(letra);
 
         colunaAtual++;
     }

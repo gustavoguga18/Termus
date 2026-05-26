@@ -13,7 +13,11 @@
 
         <activity
             android:name=".MainActivity" />
+        <activity android:name=".RankingActivity"/>
 
+        <activity android:name=".PerfilActivity"/>
+
+        <activity android:name=".ConfigActivity"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
